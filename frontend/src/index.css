@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --color-saffron: #FF9933;
+  --color-green: #138808;
+  --color-navy: #000080;
+  --color-white: #FFFFFF;
+  --color-bg-dark: #0f172a;
+}
+
+@theme {
+  --color-saffron: var(--color-saffron);
+  --color-india-green: var(--color-green);
+  --color-navy-blue: var(--color-navy);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-dark);
+  color: var(--color-white);
+  overflow-x: hidden;
+}
