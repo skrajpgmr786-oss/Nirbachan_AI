@@ -16,24 +16,30 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/', icon: <HomeIcon className="w-4 h-4" /> },
-    { name: 'Journey', path: '/journey', icon: < Timeline className="w-4 h-4" /> },
+    { name: 'Journey', path: '/journey', icon: <Timeline className="w-4 h-4" /> },
     { name: 'Dashboard', path: '/dashboard', icon: <BarChart3 className="w-4 h-4" /> },
     { name: 'Quiz', path: '/quiz', icon: <HelpCircle className="w-4 h-4" /> },
     { name: 'Mock EVM', path: '/evm', icon: <Vote className="w-4 h-4" /> },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      scrolled ? 'py-4' : 'py-8'
-    }`}>
+    <nav 
+      role="navigation" 
+      aria-label="Main Navigation"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'py-4' : 'py-8'}`}
+    >
       <div className="max-w-7xl mx-auto px-6">
-        <div className={`glass-card px-8 py-3 flex items-center justify-between border-white/5 shadow-2xl transition-all duration-500 ${
+        <header className={`glass-card px-8 py-3 flex items-center justify-between border-white/5 shadow-2xl transition-all duration-500 ${
           scrolled ? 'bg-black/60' : 'bg-white/5'
         }`}>
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link 
+            to="/" 
+            className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-india-saffron rounded-lg"
+            aria-label="Nirbachan Home"
+          >
             <div className="p-2 bg-india-saffron rounded-xl group-hover:rotate-12 transition-transform duration-500">
-              <Vote className="w-6 h-6 text-white" />
+              <Vote className="w-6 h-6 text-white" aria-hidden="true" />
             </div>
             <span className="text-2xl font-black tracking-tighter uppercase font-['Outfit']">
               NIRBACHAN<span className="text-india-saffron">.</span>
@@ -41,63 +47,66 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-2">
+          <ul className="hidden md:flex items-center gap-2">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.path}
-                className="relative px-4 py-2 text-sm font-semibold text-gray-400 hover:text-white transition-colors group"
-              >
-                <div className="flex items-center gap-2">
+              <li key={link.name}>
+                <Link 
+                  to={link.path}
+                  className={`relative px-4 py-2 text-sm font-semibold transition-colors group flex items-center gap-2 ${
+                    location.pathname === link.path ? 'text-white' : 'text-gray-400 hover:text-white'
+                  }`}
+                  aria-current={location.pathname === link.path ? 'page' : undefined}
+                >
                   {link.name}
-                </div>
-                {location.pathname === link.path && (
-                  <motion.div 
-                    layoutId="nav-active"
-                    className="absolute inset-0 bg-white/10 rounded-full -z-10 border border-white/10"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-india-saffron scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full" />
-              </Link>
+                  {location.pathname === link.path && (
+                    <motion.div 
+                      layoutId="nav-active"
+                      className="absolute inset-0 bg-white/10 rounded-full -z-10 border border-white/10"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-india-saffron scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full" />
+                </Link>
+              </li>
             ))}
-            <div className="ml-4 pl-4 border-l border-white/10">
-              <button className="btn-premium bg-white text-black text-xs h-10 px-6 font-bold hover:bg-india-saffron hover:text-white">
-                LOGIN
-              </button>
-            </div>
-          </div>
+          </ul>
 
           {/* Mobile Toggle */}
-          <button className="md:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X /> : <Menu />}
+          <button 
+            className="md:hidden text-white p-2 focus:ring-2 focus:ring-india-saffron rounded-lg" 
+            onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+            aria-label={isOpen ? "Close Menu" : "Open Menu"}
+          >
+            {isOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
-        </div>
+        </header>
       </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <motion.ul
+            id="mobile-menu"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-full left-6 right-6 mt-4 glass-card p-6 border-white/10 overflow-hidden shadow-2xl"
+            className="md:hidden absolute top-full left-6 right-6 mt-4 glass-card p-6 border-white/10 overflow-hidden shadow-2xl flex flex-col gap-4"
           >
-            <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
+            {navLinks.map((link) => (
+              <li key={link.name}>
                 <Link 
-                  key={link.name} 
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-4 text-lg font-semibold text-gray-400 hover:text-white p-2"
+                  className="flex items-center gap-4 text-lg font-semibold text-gray-400 hover:text-white p-2 rounded-lg hover:bg-white/5"
                 >
                   {link.icon}
                   {link.name}
                 </Link>
-              ))}
-            </div>
-          </motion.div>
+              </li>
+            ))}
+          </motion.ul>
         )}
       </AnimatePresence>
     </nav>
