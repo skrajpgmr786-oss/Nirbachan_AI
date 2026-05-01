@@ -1,88 +1,138 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ChevronRight, ShieldCheck, Cpu, Trophy, MessageSquare, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ShieldCheck, Zap, Bot } from 'lucide-react';
 
 const Home = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1 }
+  };
+
   return (
-    <div className="relative w-full overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-saffron/20 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-india-green/20 blur-[120px]" />
-        <div className="absolute top-[40%] left-[50%] translate-x-[-50%] w-[60%] h-[60%] rounded-full bg-navy-blue/10 blur-[150px]" />
+    <div className="relative pt-20 pb-32">
+      {/* Background Ashoka Chakra */}
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 opacity-[0.03]">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/1/17/Ashoka_Chakra.svg" 
+          className="w-[800px] ashoka-spin" 
+          alt="Ashoka Chakra"
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
-        <div className="text-center max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-              Empowering the <span className="text-transparent bg-clip-text bg-gradient-to-r from-saffron via-white to-india-green">World's Largest Democracy</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
-              Nirbachan is your AI-powered companion for navigating the Indian election process. Learn, prepare, and vote with confidence.
-            </p>
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Hero Section */}
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="text-center mb-24"
+        >
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 glass-card mb-8 border-india-saffron/30">
+            <Zap className="w-4 h-4 text-india-saffron fill-india-saffron" />
+            <span className="text-sm font-semibold tracking-wider text-india-saffron uppercase">AI-Powered Election Guide</span>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Link
-              to="/journey"
-              className="px-8 py-4 bg-saffron hover:bg-orange-500 text-white rounded-full font-bold text-lg transition-all shadow-[0_0_20px_rgba(255,153,51,0.4)] flex items-center gap-2 hover:scale-105"
-            >
-              Start Your Journey <ChevronRight size={20} />
+          <motion.h1 variants={itemVariants} className="text-6xl md:text-8xl font-black mb-8 leading-tight">
+            Empowering the <br />
+            <span className="text-gradient">World's Largest</span> <br />
+            Democracy
+          </motion.h1>
+
+          <motion.p variants={itemVariants} className="text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+            Nirbachan is your premium AI-powered companion for navigating the Indian election process. 
+            Learn, prepare, and participate with futuristic tools and real-time insights.
+          </motion.p>
+
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <Link to="/journey" className="btn-premium bg-india-saffron text-white shadow-india-saffron/20 group">
+              Start Your Journey
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link
-              to="/evm"
-              className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-full font-bold text-lg transition-all flex items-center gap-2 backdrop-blur-sm hover:scale-105"
-            >
+            <Link to="/evm" className="btn-premium glass-card hover:bg-white/10">
               Try Mock EVM
             </Link>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Features Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-32"
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          <div className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm hover:bg-white/10 transition-colors cursor-default group">
-            <div className="w-14 h-14 bg-saffron/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <Bot className="w-8 h-8 text-saffron" />
-            </div>
-            <h3 className="text-2xl font-bold mb-4 text-white">AI Assistant</h3>
-            <p className="text-gray-400">Multilingual chatbot powered by Gemini AI to answer all your election-related queries instantly.</p>
-          </div>
+          <FeatureCard 
+            variants={itemVariants}
+            icon={<MessageSquare className="w-8 h-8 text-india-saffron" />}
+            title="Multilingual AI Assistant"
+            desc="Chat with our Gemini-powered bot in English, Hindi, or Bengali for instant election support."
+            color="border-india-saffron/20"
+          />
+          <FeatureCard 
+            variants={itemVariants}
+            icon={<ShieldCheck className="w-8 h-8 text-india-white" />}
+            title="EVM & Biometric Simulator"
+            desc="Experience a realistic, high-fidelity voting process with VVPAT and biometric simulation."
+            color="border-white/20"
+          />
+          <FeatureCard 
+            variants={itemVariants}
+            icon={<Trophy className="w-8 h-8 text-india-green" />}
+            title="Gamified Awareness"
+            desc="Take interactive quizzes, earn civic badges, and level up your democratic knowledge."
+            color="border-india-green/20"
+          />
+        </motion.div>
 
-          <div className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm hover:bg-white/10 transition-colors cursor-default group">
-            <div className="w-14 h-14 bg-india-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <ShieldCheck className="w-8 h-8 text-india-green" />
-            </div>
-            <h3 className="text-2xl font-bold mb-4 text-white">Mock EVM Simulator</h3>
-            <p className="text-gray-400">Experience the voting process with our realistic, interactive Electronic Voting Machine simulator.</p>
-          </div>
-
-          <div className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm hover:bg-white/10 transition-colors cursor-default group">
-            <div className="w-14 h-14 bg-navy-blue/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <Zap className="w-8 h-8 text-blue-400" />
-            </div>
-            <h3 className="text-2xl font-bold mb-4 text-white">Gamified Learning</h3>
-            <p className="text-gray-400">Test your knowledge with interactive quizzes, earn badges, and become an election expert.</p>
+        {/* Stats Section */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mt-32 glass-card p-12 border-india-navy/20 relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-64 h-64 bg-india-navy/10 blur-[100px] -z-10" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <StatItem value="96.8Cr+" label="Eligible Voters" />
+            <StatItem value="10L+" label="Polling Stations" />
+            <StatItem value="543" label="LS Constituencies" />
+            <StatItem value="28" label="States & 8 UTs" />
           </div>
         </motion.div>
       </div>
     </div>
   );
 };
+
+const FeatureCard = ({ icon, title, desc, color, variants }) => (
+  <motion.div 
+    variants={variants}
+    whileHover={{ y: -10 }}
+    className={`glass-card p-10 border ${color} hover:border-white/30 transition-all duration-500`}
+  >
+    <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit">
+      {icon}
+    </div>
+    <h3 className="text-2xl font-bold mb-4">{title}</h3>
+    <p className="text-gray-400 leading-relaxed">{desc}</p>
+  </motion.div>
+);
+
+const StatItem = ({ value, label }) => (
+  <div>
+    <div className="text-4xl font-black text-india-white mb-2 font-['Outfit']">{value}</div>
+    <div className="text-sm uppercase tracking-widest text-gray-500 font-bold">{label}</div>
+  </div>
+);
 
 export default Home;
