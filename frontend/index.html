@@ -2,9 +2,71 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <title>Nirbachan - Intelligent Election Assistant</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Guaranteed Tailwind Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'india-saffron': '#FF9933',
+              'india-green': '#138808',
+              'india-navy': '#000080',
+              'india-white': '#FFFFFF',
+              'dark-bg': '#0a0a0c',
+            },
+            backgroundImage: {
+              'ashoka-gradient': "linear-gradient(135deg, #FF9933 0%, #FFFFFF 50%, #138808 100%)",
+            }
+          }
+        }
+      }
+    </script>
+    
+    <style>
+      body {
+        background-color: #0a0a0c;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+      }
+      .text-gradient {
+        background: linear-gradient(to r, #FF9933, #FFFFFF, #138808);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .btn-premium {
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .ashoka-spin {
+        animation: spin-slow 20s linear infinite;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
