@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nirbachan - Intelligent Election Assistant</title>
+    <title>Nirbachan - AI Election Platform</title>
     
-    <!-- Premium Fonts -->
+    <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Guaranteed Tailwind Styling -->
+    <!-- Robust Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -32,40 +32,81 @@
       }
     </script>
     
+    <!-- Emergency Premium Stylesheet -->
     <style>
+      :root {
+        --saffron: #FF9933;
+        --white: #FFFFFF;
+        --green: #138808;
+      }
+      
       body {
-        background-color: #0a0a0c;
-        color: white;
-        font-family: 'Poppins', sans-serif;
+        background-color: #0a0a0c !important;
+        color: white !important;
+        font-family: 'Poppins', sans-serif !important;
         margin: 0;
+        overflow-x: hidden;
       }
+
+      /* Global Premium Styles */
       .glass-card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.03) !important;
+        backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 24px !important;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
       }
+
       .text-gradient {
-        background: linear-gradient(to r, #FF9933, #FFFFFF, #138808);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        background: linear-gradient(to right, #FF9933, #FFFFFF, #138808);
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        font-weight: 800;
       }
+
       .btn-premium {
-        padding: 0.75rem 1.5rem;
-        border-radius: 9999px;
-        font-weight: 600;
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
+        background: #FF9933 !important;
+        color: white !important;
+        padding: 14px 28px !important;
+        border-radius: 16px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        transition: all 0.4s ease !important;
+        border: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        box-shadow: 0 10px 20px rgba(255, 153, 51, 0.2) !important;
       }
+
+      .btn-premium:hover {
+        transform: translateY(-3px) scale(1.02) !important;
+        box-shadow: 0 15px 30px rgba(255, 153, 51, 0.4) !important;
+        background: #FFAB5E !important;
+      }
+
       @keyframes spin-slow {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
       }
+
       .ashoka-spin {
-        animation: spin-slow 20s linear infinite;
+        animation: spin-slow 30s linear infinite !important;
       }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #0a0a0c; }
+      ::-webkit-scrollbar-thumb { 
+        background: rgba(255, 255, 255, 0.1); 
+        border-radius: 10px; 
+      }
+      ::-webkit-scrollbar-thumb:hover { background: #FF9933; }
+
+      /* Fix for unstyled list items */
+      ul { list-style: none; padding: 0; }
+      a { text-decoration: none; color: inherit; }
     </style>
   </head>
   <body>
