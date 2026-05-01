@@ -1,143 +1,122 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { Users, TrendingUp, MapPin } from 'lucide-react';
-
-const turnoutData = [
-  { time: '8 AM', votes: 15 },
-  { time: '10 AM', votes: 35 },
-  { time: '12 PM', votes: 48 },
-  { time: '2 PM', votes: 55 },
-  { time: '4 PM', votes: 68 },
-  { time: '6 PM', votes: 72 },
-];
-
-const partyData = [
-  { name: 'Progressive', value: 45, color: '#FF9933' }, // Saffron
-  { name: 'Development', value: 30, color: '#138808' }, // Green
-  { name: 'United', value: 20, color: '#000080' },    // Navy
-  { name: 'Others', value: 5, color: '#9CA3AF' },     // Gray
-];
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
+import { Users, Building2, MapPin, TrendingUp, Info } from 'lucide-react';
 
 const Dashboard = () => {
+  const voterData = [
+    { year: '2004', turnout: 58.1 },
+    { year: '2009', turnout: 58.2 },
+    { year: '2014', turnout: 66.4 },
+    { year: '2019', turnout: 67.4 },
+    { year: '2024', turnout: 66.8 },
+  ];
+
+  const demographicData = [
+    { name: '18-25', value: 20 },
+    { name: '26-45', value: 45 },
+    { name: '46-60', value: 25 },
+    { name: '60+', value: 10 },
+  ];
+
+  const COLORS = ['#FF9933', '#138808', '#000080', '#FFFFFF'];
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="mb-10">
-        <h1 className="text-3xl font-bold text-white mb-2">Live Election Dashboard</h1>
-        <p className="text-gray-400">Simulated real-time voting data and predictions</p>
+    <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16"
+      >
+        <div>
+          <h1 className="text-5xl font-black mb-4">Election <span className="text-gradient">Insights</span></h1>
+          <p className="text-gray-400 text-lg">Real-time data and historical trends of the Indian electoral landscape.</p>
+        </div>
+        <div className="flex gap-4">
+          <div className="px-4 py-2 glass-card border-india-green/30 text-india-green text-sm font-bold flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-india-green animate-ping" />
+            LIVE DATA FEED
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Stats Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <StatCard icon={<Users className="text-india-saffron" />} label="Total Voters" value="96.8 Cr" change="+6.5%" />
+        <StatCard icon={<Building2 className="text-india-white" />} label="Constituencies" value="543" change="0.0%" />
+        <StatCard icon={<MapPin className="text-india-green" />} label="Polling Booths" value="10.5 L" change="+12%" />
+        <StatCard icon={<TrendingUp className="text-india-navy" />} label="Avg Turnout" value="67.1%" change="+0.7%" />
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white/5 border border-white/10 p-6 rounded-2xl"
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Turnout Trend */}
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          className="lg:col-span-2 glass-card p-8 border-white/5"
         >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
-              <Users className="text-blue-400 w-6 h-6" />
-            </div>
-            <span className="text-sm font-medium text-green-400 bg-green-400/10 px-2 py-1 rounded-full">+12%</span>
+          <div className="flex items-center justify-between mb-8">
+            <h3 className="text-xl font-bold">Voter Turnout Trend (General Elections)</h3>
+            <Info className="w-4 h-4 text-gray-600" />
           </div>
-          <h3 className="text-gray-400 text-sm font-medium mb-1">Total Turnout</h3>
-          <p className="text-3xl font-bold text-white">72.4%</p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white/5 border border-white/10 p-6 rounded-2xl"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-saffron/20 rounded-full flex items-center justify-center">
-              <TrendingUp className="text-saffron w-6 h-6" />
-            </div>
-            <span className="text-sm font-medium text-saffron bg-saffron/10 px-2 py-1 rounded-full">High</span>
+          <div className="h-[400px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={voterData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#222" />
+                <XAxis dataKey="year" stroke="#666" />
+                <YAxis stroke="#666" />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#0a0a0c', border: '1px solid #333', borderRadius: '12px' }}
+                  itemStyle={{ color: '#fff' }}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="turnout" 
+                  stroke="#FF9933" 
+                  strokeWidth={4} 
+                  dot={{ r: 6, fill: '#FF9933', strokeWidth: 2, stroke: '#fff' }}
+                  activeDot={{ r: 8, strokeWidth: 0 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
-          <h3 className="text-gray-400 text-sm font-medium mb-1">AI Predicted Turnout</h3>
-          <p className="text-3xl font-bold text-white">75.8%</p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white/5 border border-white/10 p-6 rounded-2xl"
+        {/* Demographics */}
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          className="glass-card p-8 border-white/5"
         >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
-              <MapPin className="text-purple-400 w-6 h-6" />
-            </div>
-            <span className="text-sm font-medium text-gray-400 bg-white/10 px-2 py-1 rounded-full">Active</span>
-          </div>
-          <h3 className="text-gray-400 text-sm font-medium mb-1">Active Polling Stations</h3>
-          <p className="text-3xl font-bold text-white">10,42,288</p>
-        </motion.div>
-      </div>
-
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Bar Chart */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3 }}
-          className="bg-white/5 border border-white/10 p-6 rounded-2xl h-[400px]"
-        >
-          <h3 className="text-lg font-bold text-white mb-6">Voting Trend (Hourly)</h3>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={turnoutData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff20" vertical={false} />
-              <XAxis dataKey="time" stroke="#9ca3af" axisLine={false} tickLine={false} />
-              <YAxis stroke="#9ca3af" axisLine={false} tickLine={false} />
-              <Tooltip
-                contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151', borderRadius: '0.5rem' }}
-                itemStyle={{ color: '#fff' }}
-              />
-              <Bar dataKey="votes" fill="#FF9933" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </motion.div>
-
-        {/* Pie Chart */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4 }}
-          className="bg-white/5 border border-white/10 p-6 rounded-2xl h-[400px] flex flex-col"
-        >
-          <h3 className="text-lg font-bold text-white mb-2">Vote Distribution</h3>
-          <div className="flex-1 min-h-0">
+          <h3 className="text-xl font-bold mb-8">Voter Demographics</h3>
+          <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={partyData}
-                  cx="50%"
-                  cy="50%"
+                  data={demographicData}
                   innerRadius={80}
-                  outerRadius={120}
+                  outerRadius={100}
                   paddingAngle={5}
                   dataKey="value"
-                  stroke="none"
                 >
-                  {partyData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  {demographicData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151', borderRadius: '0.5rem' }}
-                  itemStyle={{ color: '#fff' }}
+                  contentStyle={{ backgroundColor: '#0a0a0c', border: '1px solid #333', borderRadius: '12px' }}
                 />
               </PieChart>
             </ResponsiveContainer>
           </div>
-          <div className="flex justify-center gap-6 mt-4 flex-wrap">
-            {partyData.map((party, idx) => (
-              <div key={idx} className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: party.color }} />
-                <span className="text-sm text-gray-300">{party.name}</span>
+          <div className="space-y-4 mt-8">
+            {demographicData.map((item, index) => (
+              <div key={item.name} className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index] }} />
+                  <span className="text-sm text-gray-400">{item.name} Age Group</span>
+                </div>
+                <span className="font-bold">{item.value}%</span>
               </div>
             ))}
           </div>
@@ -146,5 +125,25 @@ const Dashboard = () => {
     </div>
   );
 };
+
+const StatCard = ({ icon, label, value, change }) => (
+  <motion.div 
+    whileHover={{ y: -5 }}
+    className="glass-card p-6 border-white/5 relative overflow-hidden group"
+  >
+    <div className="flex items-start justify-between mb-4">
+      <div className="p-3 rounded-xl bg-white/5 group-hover:bg-white/10 transition-colors">
+        {icon}
+      </div>
+      <div className={`text-xs font-bold px-2 py-1 rounded-md ${
+        change.startsWith('+') ? 'bg-india-green/20 text-india-green' : 'bg-gray-500/20 text-gray-400'
+      }`}>
+        {change}
+      </div>
+    </div>
+    <div className="text-3xl font-black mb-1 font-['Outfit']">{value}</div>
+    <div className="text-xs uppercase tracking-widest text-gray-500 font-bold">{label}</div>
+  </motion.div>
+);
 
 export default Dashboard;

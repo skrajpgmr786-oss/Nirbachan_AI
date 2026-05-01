@@ -1,101 +1,110 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { UserPlus, Search, Vote, FileCheck, PartyPopper } from 'lucide-react';
-
-const steps = [
-  {
-    id: 1,
-    title: 'Voter Registration',
-    description: 'Ensure you are 18+ and register on the NVSP portal. Form 6 is required for new voters.',
-    icon: UserPlus,
-    color: 'text-blue-400',
-    bgColor: 'bg-blue-400/20',
-  },
-  {
-    id: 2,
-    title: 'Verification',
-    description: 'Check your name in the electoral roll. Verify your polling booth details and EPIC number.',
-    icon: Search,
-    color: 'text-purple-400',
-    bgColor: 'bg-purple-400/20',
-  },
-  {
-    id: 3,
-    title: 'Campaign & Manifestos',
-    description: 'Learn about candidates in your constituency. Read their manifestos and past performance.',
-    icon: FileCheck,
-    color: 'text-saffron',
-    bgColor: 'bg-saffron/20',
-  },
-  {
-    id: 4,
-    title: 'Voting Day',
-    description: 'Carry your Voter ID or approved document. Wait in line, verify identity, and press the button on the EVM.',
-    icon: Vote,
-    color: 'text-india-green',
-    bgColor: 'bg-india-green/20',
-  },
-  {
-    id: 5,
-    title: 'Results',
-    description: 'Votes are counted under strict security. The candidate with the highest votes is declared the winner.',
-    icon: PartyPopper,
-    color: 'text-pink-400',
-    bgColor: 'bg-pink-400/20',
-  },
-];
+import { UserPlus, Search, FileText, Vote, BarChart, CheckCircle2 } from 'lucide-react';
 
 const Journey = () => {
+  const steps = [
+    {
+      title: "Voter Registration",
+      desc: "Ensure you are 18+ and register on the NVSP portal. Form 6 is required for new voters.",
+      icon: <UserPlus className="w-8 h-8 text-india-saffron" />,
+      color: "bg-india-saffron/10",
+      border: "border-india-saffron/30"
+    },
+    {
+      title: "Verification",
+      desc: "Check your name in the electoral roll. Verify your polling booth details and EPIC number.",
+      icon: <Search className="w-8 h-8 text-white" />,
+      color: "bg-white/10",
+      border: "border-white/30"
+    },
+    {
+      title: "Campaign & Manifestos",
+      desc: "Learn about candidates in your constituency. Read their manifestos and past performance.",
+      icon: <FileText className="w-8 h-8 text-india-green" />,
+      color: "bg-india-green/10",
+      border: "border-india-green/30"
+    },
+    {
+      title: "Voting Day",
+      desc: "Carry your Voter ID. Wait in line, verify identity, and press the button on the EVM.",
+      icon: <Vote className="w-8 h-8 text-india-navy" />,
+      color: "bg-india-navy/20",
+      border: "border-india-navy/40"
+    },
+    {
+      title: "Results",
+      desc: "Votes are counted under strict security. The candidate with the highest votes is declared the winner.",
+      icon: <BarChart className="w-8 h-8 text-india-saffron" />,
+      color: "bg-india-saffron/10",
+      border: "border-india-saffron/30"
+    }
+  ];
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">The Election Journey</h1>
-        <p className="text-xl text-gray-400">Step-by-step guide to participating in the world's largest democracy</p>
-      </div>
+    <div className="pt-32 pb-24 px-6 max-w-5xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-20"
+      >
+        <h1 className="text-5xl font-black mb-6">The Path to <span className="text-gradient">Democracy</span></h1>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          Follow the step-by-step guide to exercising your most powerful right in the world's largest democracy.
+        </p>
+      </motion.div>
 
       <div className="relative">
         {/* Connection Line */}
-        <div className="absolute left-[50%] top-0 bottom-0 w-1 bg-white/10 -translate-x-1/2 hidden md:block" />
+        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-india-saffron via-white to-india-green opacity-20 hidden md:block" />
 
         <div className="space-y-12">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            const isEven = index % 2 === 0;
-
-            return (
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                key={step.id}
-                className={`flex flex-col md:flex-row items-center justify-between gap-8 ${
-                  isEven ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-              >
-                {/* Content */}
-                <div className={`w-full md:w-5/12 ${isEven ? 'md:text-right' : 'md:text-left'}`}>
-                  <div className="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm hover:bg-white/10 transition-colors">
-                    <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
-                    <p className="text-gray-400">{step.description}</p>
+          {steps.map((step, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className={`flex flex-col md:flex-row items-center gap-8 ${
+                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+              }`}
+            >
+              <div className="md:w-1/2 flex justify-center md:justify-end">
+                <div className={`glass-card p-8 border ${step.border} max-w-md hover:bg-white/10 transition-colors group`}>
+                  <div className={`p-4 rounded-xl ${step.color} w-fit mb-6 group-hover:scale-110 transition-transform`}>
+                    {step.icon}
                   </div>
+                  <h3 className="text-2xl font-bold mb-4">{step.title}</h3>
+                  <p className="text-gray-400 leading-relaxed">{step.desc}</p>
                 </div>
+              </div>
 
-                {/* Center Icon */}
-                <div className="relative z-10 w-16 h-16 flex-shrink-0">
-                  <div className={`absolute inset-0 rounded-full ${step.bgColor} animate-ping opacity-20`} />
-                  <div className={`w-full h-full rounded-full bg-bg-dark border-4 border-white/10 flex items-center justify-center ${step.bgColor}`}>
-                    <Icon className={`w-8 h-8 ${step.color}`} />
-                  </div>
-                </div>
+              {/* Dot on line */}
+              <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center justify-center">
+                <div className="w-4 h-4 rounded-full bg-white border-4 border-india-navy shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
+              </div>
 
-                {/* Empty Space for alignment */}
-                <div className="w-full md:w-5/12 hidden md:block" />
-              </motion.div>
-            );
-          })}
+              <div className="md:w-1/2 hidden md:block" />
+            </motion.div>
+          ))}
         </div>
       </div>
+
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        className="mt-24 p-12 glass-card text-center border-india-green/20"
+      >
+        <CheckCircle2 className="w-16 h-16 text-india-green mx-auto mb-6" />
+        <h2 className="text-3xl font-bold mb-4 text-india-white">Ready to make a difference?</h2>
+        <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+          Ensure your EPIC card is updated and you know your polling booth. Your vote is your voice.
+        </p>
+        <button className="btn-premium bg-india-green text-white">
+          Check Voter Eligibility
+        </button>
+      </motion.div>
     </div>
   );
 };
